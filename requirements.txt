@@ -1,0 +1,7 @@
+fastapi
+openai
+openpyxl
+pandas
+python-dotenv
+python-multipart
+uvicorn[standard]

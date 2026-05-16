@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance Report Generator</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">KIET CSE AI</p>
+        <h1>Attendance Report Generator</h1>
+      </div>
+      <span class="status-pill" id="api-status">Checking API</span>
+    </header>
+
+    <section class="workspace" aria-label="Generate attendance report">
+      <div class="upload-panel">
+        <label class="dropzone" id="dropzone" for="file-input">
+          <input id="file-input" type="file" accept=".xlsx">
+          <span class="file-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <path d="M14 2v6h6"/>
+              <path d="M8 13h8"/>
+              <path d="M8 17h8"/>
+              <path d="M8 9h2"/>
+            </svg>
+          </span>
+          <strong id="file-title">Choose Excel file</strong>
+          <span id="file-meta">Drop a KIET attendance workbook here</span>
+        </label>
+
+        <div class="controls">
+          <label class="field">
+            <span>Threshold</span>
+            <div class="number-wrap">
+              <input id="threshold" type="number" min="0" max="100" value="75">
+              <em>%</em>
+            </div>
+          </label>
+
+          <label class="toggle">
+            <input id="include-emails" type="checkbox">
+            <span></span>
+            <b>Include warning letters</b>
+          </label>
+        </div>
+
+        <button id="generate-btn" type="button" disabled>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v12"/>
+            <path d="m7 10 5 5 5-5"/>
+            <path d="M5 21h14"/>
+          </svg>
+          Generate PDF
+        </button>
+      </div>
+
+      <aside class="summary-panel">
+        <div class="preview-sheet">
+          <div class="sheet-top"></div>
+          <div class="sheet-line wide"></div>
+          <div class="sheet-line"></div>
+          <div class="sheet-grid">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="sheet-line accent"></div>
+          <div class="sheet-line wide"></div>
+          <div class="sheet-line"></div>
+          <div class="sheet-line short"></div>
+        </div>
+
+        <div class="result-card" id="result-card">
+          <span class="result-label">Output</span>
+          <strong id="result-title">No report generated</strong>
+          <p id="result-meta">Your PDF will appear here when ready.</p>
+          <a id="download-link" hidden>Download PDF</a>
+        </div>
+      </aside>
+    </section>
+
+    <p class="message" id="message" role="status"></p>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

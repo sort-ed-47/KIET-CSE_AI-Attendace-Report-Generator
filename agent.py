@@ -495,41 +495,7 @@ def add_pdf_section(pdf: "FPDF", title: str, body: str):
 
 def save_pdf_report(data: dict, summary: str, insights: str, emails: list,
                     output_dir: str, source_file: str) -> str:
-    if FPDF is None:
-        return save_basic_pdf_report(data, summary, insights, emails, output_dir, source_file)
-
-    pdf = FPDF(format="A4")
-    pdf.set_auto_page_break(auto=True, margin=12)
-    pdf.add_page()
-
-    pdf.set_font("Arial", "B", 15)
-    pdf.cell(0, 10, make_pdf_safe(data["institution"]), ln=True, align="C")
-    pdf.set_font("Arial", size=11)
-    pdf.cell(0, 7, make_pdf_safe(data["department"]), ln=True, align="C")
-    pdf.cell(0, 7, make_pdf_safe(data["class_info"]), ln=True, align="C")
-    pdf.ln(4)
-
-    add_pdf_section(pdf, "ATTENDANCE SUMMARY REPORT", summary)
-    pdf.add_page()
-    add_pdf_section(pdf, "LECTURE-WISE ATTENDANCE INSIGHTS", insights)
-
-    if emails:
-        pdf.add_page()
-        letters = []
-        for e in emails:
-            letters.append(
-                f"TO   : {e['name']}\n"
-                f"ROLL : {e['roll_no']}  |  Attendance: {e['pct']}%\n"
-                f"{'-' * 45}\n"
-                f"{e['email']}\n"
-                f"{'=' * 65}"
-            )
-        add_pdf_section(pdf, "ATTENDANCE WARNING LETTERS", "\n\n".join(letters))
-
-    pdf_name = f"{Path(source_file).stem}.pdf"
-    pdf_path = os.path.join(output_dir, pdf_name)
-    pdf.output(pdf_path)
-    return pdf_name
+    return save_basic_pdf_report(data, summary, insights, emails, output_dir, source_file)
 
 
 def wrap_pdf_lines(text: str, width: int = 108) -> list:
