@@ -1,0 +1,10 @@
+# Never commit your API key
+.env
+ 
+# Python
+__pycache__/
+*.pyc
+ 
+# Output folders
+attendance_output/
+ 
